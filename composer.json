@@ -1,0 +1,5 @@
+{
+    "require": {
+        "tegic/http": "^1.0"
+    }
+}
