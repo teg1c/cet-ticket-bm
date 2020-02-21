@@ -4,9 +4,8 @@ require_once './vendor/autoload.php';
 require_once './common.php';
 $act = isset($_GET['act']) && !empty($_GET['act']) ? $_GET['act'] : 'login';
 $http = new \tegic\Http();
-
+$token = session_id();
 if ($act == 'login') {
-    $token = session_id();
     require_once './template/login.html.php';
 } elseif ($act == 'code') {
     header("Expires: Mon, 26 Jul 2012 05:00:00 GMT");
@@ -14,7 +13,6 @@ if ($act == 'login') {
     header("Cache-Control: no-cache, must-revalidate");
     header("Pramga: no-cache");
     header('Content-Type: image/jpeg');
-    $token = $_GET['token'];
     if (!is_dir(BASE_PATH . '/tmp')) {
         mkdir(BASE_PATH . '/tmp', 0777, true);
     }
@@ -23,10 +21,9 @@ if ($act == 'login') {
     $result = $http->connect("http://cet-bm.neea.edu.cn/Home/VerifyCodeImg?a=" . mt_rand(100000, 999999));
     echo $result;
 } elseif ($act == 'query') {
-    if (!$_POST){
+    if (!$_POST) {
         exit('Permission denied;');
     }
-    $token = $_POST['token'];
     $provinceCode = $_POST['province_code'];
     $id_number = $_POST['id_card'];
     $username = $_POST['real_name'];

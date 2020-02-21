@@ -120,7 +120,7 @@
         </div>
         <div class="weui-cell__ft">
             <img class="weui-vcode-img" style="width: 100px;height: 40px" onclick="update_code()"
-                 src="./index.php?act=code&token=<?php echo $token;?>">
+                 src="./index.php?act=code">
         </div>
     </div>
     </div>
@@ -207,7 +207,7 @@
     var query_url = "./index.php?act=query";
     var token = "<?php echo $token;?>";
     function update_code() {
-        var img_url = "./index.php?act=code&token=" + token + "&_t=" + (new Date()).getTime();
+        var img_url = "./index.php?act=code&_t=" + (new Date()).getTime();
         $(".weui-vcode-img").attr("src", img_url);
     }
     $(function () {
