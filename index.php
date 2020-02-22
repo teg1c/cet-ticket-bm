@@ -2,6 +2,7 @@
 session_start();
 require_once './vendor/autoload.php';
 require_once './common.php';
+require_once './exception/AppError.php';
 $act = isset($_GET['act']) && !empty($_GET['act']) ? $_GET['act'] : 'login';
 $http = new \tegic\Http();
 $token = session_id();
@@ -22,7 +23,7 @@ if ($act == 'login') {
     echo $result;
 } elseif ($act == 'query') {
     if (!$_POST) {
-        exit('Permission denied;');
+        throw new AppError('Permission denied');
     }
     $provinceCode = $_POST['province_code'];
     $id_number = $_POST['id_card'];
